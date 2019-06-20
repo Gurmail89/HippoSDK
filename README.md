@@ -1,6 +1,4 @@
-# Installing	Hippochat	SDK	on
-
-# Android
+# Installing Hippochat SDK on Android
 
 Install	Hippochat	to	see	and	talk	to	users	of	your	Android	app.
 Hippochat	for	Android	supports	API	16	and	above.
