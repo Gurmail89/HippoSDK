@@ -3,7 +3,7 @@
 Install	Hippochat	to	see	and	talk	to	users	of	your	Android	app.
 Hippochat	for	Android	supports	API	16	and	above.
 
-## Pre	Requisites	:
+## Pre Requisites	:
 
 ````
 1. Hippochat Library can be included in any Android application.
@@ -14,20 +14,15 @@ The	SDK	itself is compatible all the way down to JELLY_BEAN(API	Level 16).
 If	you	have	any	queries	during	the	integration,	please	reach	out	to	us	at
 support@fuguchat.com
 
-## Step	1:	Add	Hippo	SDK	to	your
+## Step	1: Add	Hippo SDK	to your app
 
-## app
-
-Add	the	following	dependency	to	your	app	module’s	build.gradle	file
+Add	the	following	dependency to your app module’s	build.gradle file
 project/app/build.gradle:
 
 ```
 android{
 				...
 				compileOptions	{
-```
-
-```
 								sourceCompatibility	JavaVersion.VERSION_1_
 								targetCompatibility	JavaVersion.VERSION_1_
 				}
@@ -40,6 +35,7 @@ dependencies	{
 				implementation	'com.hippochat:hippo:1.0.3’
 }
 ```
+
 Add	Kotlin support	in	your	project(If	not	supported)
 Add	the	following	code	into	your	project	build.gradle	file
 
@@ -54,17 +50,14 @@ in:$kotlin_version"
 				}
 }
 ```
-Do	not	forget	to	add	internet	permission	in	manifest	if	already	not
-present
+Do not forget to add internet permission in	manifest if already	not present
 
 
 ```
 <uses-permission	android:name="android.permission.INTERNET
 "	/>
 ```
-## Step	2:	Add	provider	in
-
-## AndroidManifest.xml
+## Step	2: Add provider in AndroidManifest.xml
 
 ```
 <provider
@@ -78,10 +71,11 @@ com.example.project.provider
 							android:resource="@xml/provider_paths"	/>
 </provider>
 ```
+
+Create a folder named xml in app/src/main/res
+Create a file	named	provider_paths.xml in	xml folder and add following code:
+
 ```
-Create	a	folder	named	xml	in	app/src/main/res
-Create	a	file	named	provider_paths.xml	in	xml	folder	and	a
-dd	following	code	:
 <paths	xmlns:android="http://schemas.android.com/apk/res/a
 ndroid">
 				<external-path	name="external_files"	path="."/>
@@ -90,11 +84,12 @@ ndroid">
 
 ## Step	3:	Initializing	Hippo	SDK
 
-Then	initialize	paper	db	in	onCreate()	Method	of	application	class	:
+Then initialize	paperdb in onCreate() Method of application class:
 
 ```
 Paper.init(getApplicationContext());
 ```
+
 Create	Hippo	instance	with	your	app	secret	key	before	invoking/
 attempting	to	use	any	other	features	of	Fugu	SDK.
 
