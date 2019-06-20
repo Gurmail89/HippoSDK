@@ -9,7 +9,7 @@ Hippochat for Android supports API 16 and above.
 1. Hippochat Librarycan be included in any Android application.
 2. Hippochat Library supports Android 4.1.x	(JELLY_BEAN) and later.
 3. Hippochat SDK supports apps targeting Android version 5.0+.
-The	SDK	itself is compatible all the way down to JELLY_BEAN(API	Level 16).
+The SDK itself is compatible all the way down to JELLY_BEAN(API	Level 16).
 ````
 If you have any	queries	during the integration, please reach out to us at support@hippochat.com
 
@@ -19,19 +19,19 @@ Add	the	following dependency to your app module’s build.gradle file
 project/app/build.gradle:
 
 ```
-android{
-		...
-		compileOptions	{
-			sourceCompatibility	JavaVersion.VERSION_1_
-			targetCompatibility	JavaVersion.VERSION_1_
-		}
-		packagingOptions	{
-			pickFirst('META-INF/LICENSE')
-			pickFirst('META-INF/LICENSE.txt')
-		}
+android {
+	...
+	compileOptions {
+		sourceCompatibility	JavaVersion.VERSION_1_
+		targetCompatibility	JavaVersion.VERSION_1_
+	}
+	packagingOptions {
+		pickFirst('META-INF/LICENSE')
+		pickFirst('META-INF/LICENSE.txt')
+    }
 }
-dependencies	{
-		implementation	'com.hippochat:hippo:1.0.3’
+dependencies {
+	implementation 'com.hippochat:hippo:1.0.3’
 }
 ```
 
@@ -40,12 +40,12 @@ Add	the	following	code	into	your	project	build.gradle	file
 
 ```
 buildscript	{
-		ext.kotlin_version	=	'1.2.71'
+	ext.kotlin_version = '1.2.71'
+	...
+	dependencies {
 		...
-		dependencies {
-			...
-			classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-	}
+		classpath "org.jetbrains.kotlin:kotlin-gradle plugin:$kotlin_version"
+   }
 }
 ```
 Do not forget to add internet permission in	manifest if already	not present
@@ -298,9 +298,6 @@ PRIORITY_HIGH);
 tionContext(),	remoteMessage.getData())
 			}
 }	else	{
-```
-
-```
 			//	Your	logic	goes	here
 }
 }
