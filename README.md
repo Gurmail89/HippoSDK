@@ -1,38 +1,37 @@
 # Installing Hippochat SDK on Android
 
-Install	Hippochat	to	see	and	talk	to	users	of	your	Android	app.
-Hippochat	for	Android	supports	API	16	and	above.
+Install	Hippochat to see and talk to users of your Android app.
+Hippochat for Android supports API 16 and above.
 
 ## Pre Requisites	:
 
 ````
-1. Hippochat Library can be included in any Android application.
+1. Hippochat Librarycan be included in any Android application.
 2. Hippochat Library supports Android 4.1.x	(JELLY_BEAN) and later.
-3.	Hippochat SDK supports apps targeting Android version 5.0+.
+3. Hippochat SDK supports apps targeting Android version 5.0+.
 The	SDK	itself is compatible all the way down to JELLY_BEAN(API	Level 16).
 ````
-If	you	have	any	queries	during	the	integration,	please	reach	out	to	us	at
-support@fuguchat.com
+If you have any	queries	during the integration, please reach out to us at support@hippochat.com
 
-## Step	1: Add	Hippo SDK	to your app
+## Step	1: Add Hippo SDK to your app
 
-Add	the	following	dependency to your app module’s	build.gradle file
+Add	the	following dependency to your app module’s build.gradle file
 project/app/build.gradle:
 
 ```
 android{
-				...
-				compileOptions	{
-								sourceCompatibility	JavaVersion.VERSION_1_
-								targetCompatibility	JavaVersion.VERSION_1_
-				}
-				packagingOptions	{
-								pickFirst('META-INF/LICENSE')
-								pickFirst('META-INF/LICENSE.txt')
-				}
+		...
+		compileOptions	{
+			sourceCompatibility	JavaVersion.VERSION_1_
+			targetCompatibility	JavaVersion.VERSION_1_
+		}
+		packagingOptions	{
+			pickFirst('META-INF/LICENSE')
+			pickFirst('META-INF/LICENSE.txt')
+		}
 }
 dependencies	{
-				implementation	'com.hippochat:hippo:1.0.3’
+		implementation	'com.hippochat:hippo:1.0.3’
 }
 ```
 
@@ -41,80 +40,73 @@ Add	the	following	code	into	your	project	build.gradle	file
 
 ```
 buildscript	{
-				ext.kotlin_version	=	'1.2.71'
+		ext.kotlin_version	=	'1.2.71'
+		...
+		dependencies {
 			...
-				dependencies	{
-								...
-								classpath	"org.jetbrains.kotlin:kotlin-gradle-plug
-in:$kotlin_version"
-				}
+			classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+	}
 }
 ```
 Do not forget to add internet permission in	manifest if already	not present
 
 
 ```
-<uses-permission	android:name="android.permission.INTERNET
-"	/>
+<uses-permission android:name="android.permission.INTERNET"/>
 ```
 ## Step	2: Add provider in AndroidManifest.xml
 
 ```
 <provider
-				android:name="android.support.v4.content.FileProvider"
-				android:authorities="{applicationId}.provider"	//eg	:
-com.example.project.provider
-				android:exported="false"
-				android:grantUriPermissions="true">
-				<meta-data
-							android:name="android.support.FILE_PROVIDER_PATHS"
-							android:resource="@xml/provider_paths"	/>
+		android:name="android.support.v4.content.FileProvider"
+		android:authorities="{applicationId}.provider"	//exp: com.example.project.provider
+		android:exported="false"
+		android:grantUriPermissions="true">
+		<meta-data
+			android:name="android.support.FILE_PROVIDER_PATHS"
+			android:resource="@xml/provider_paths"/>
 </provider>
 ```
 
 Create a folder named xml in app/src/main/res
-Create a file	named	provider_paths.xml in	xml folder and add following code:
+Create a file named provider_paths.xml in	xml folder and add following code:
 
 ```
-<paths	xmlns:android="http://schemas.android.com/apk/res/a
-ndroid">
-				<external-path	name="external_files"	path="."/>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+		<external-path name="external_files" path="."/>
 </paths>
 ```
 
-## Step	3:	Initializing	Hippo	SDK
+## Step	3: Initializing Hippo SDK
 
-Then initialize	paperdb in onCreate() Method of application class:
+Then initialize paperdb in onCreate() Method of application class:
 
 ```
 Paper.init(getApplicationContext());
 ```
 
-Create	Hippo	instance	with	your	app	secret	key	before	invoking/
-attempting	to	use	any	other	features	of	Fugu	SDK.
+Create	Hippo	instance	with your app secret	key	before	invoking/
+attempting	to use	any	other features of Hippo SDK.
 
-Note	:
-We	highly	recommend	instance	creation	only	once	and	from	your	app’s
-launcher/main	activity’s	onCreate() function.
-Don’t	forget	to	replace	the	YOUR-APP-SECRET-KEY in	the	following	code
+Note: We highly recommend instance creation	only	once and from your app’s
+launcher/main activity’s onCreate() function.
+Don’t	forget	to replace	the	YOUR-APP-SECRET-KEY in	the	following	code
 snippet	with	the	actual	app	secret	key.
 
-Before	invoking/	attempting	to	use	any	other	features	you	need	to
-initialised	Hippo	SDK.
+Before	invoking/attempting	to use	any	other features you need to initialised	Hippo	SDK.
 
 ```
-CaptureUserData	userData	=	new	CaptureUserData.Builder()
-							.userUniqueKey("your	unique	identifier	for	user")
-							.fullName("Full	name	string")
-							.email("Email	string")
-							.phoneNumber("phone	number	string")
+CaptureUserData	userData = new CaptureUserData.Builder()
+							.userUniqueKey("your unique identifier for user")
+							.fullName("Full name string")
+							.email("Email string")
+							.phoneNumber("phone number string")
 							...
 							.build();
 ```
 
 ```
-				HippoConfigAttributes	configAttributes	=	new	HippoConf
-igAttributes.Builder()
+HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
 								.setAppKey(YOUR-APP-SECRET-KEY)
 								.setAppType(APP_TYPE)
 								.setCaptureUserData(userData)
@@ -123,41 +115,33 @@ igAttributes.Builder()
 								.build();
 ```
 ```
-				HippoConfig.initHippoConfig(this,	configAttributes);
+HippoConfig.initHippoConfig(this, configAttributes);
 ```
 #### -OR-
-
-##### If	you	have	reseller	token	then	use	the	following
-
-##### method	in	HippoConfigAttributes	builder
+##### If you have	reseller	token	then use the following  method in HippoConfigAttributes	builder
 
 ```
-				HippoConfigAttributes	configAttributes	=	new	HippoConf
-igAttributes.Builder()
-								...
-								.setResellerToken()
-								.setReferenceId()
-								...
+HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
+				...
+				.setResellerToken()
+				.setReferenceId()
+				...
 				.build();
 ```
 ```
-				HippoConfig.initHippoConfig(this,	configAttributes);
+HippoConfig.initHippoConfig(this, configAttributes);
 ```
 
-### Hippo	offers	some	other	amazing
+### Hippo offers	some	other	amazing features
 
-### features
-
-#### To	send	custom	attributes:
+#### To send custom attributes:
 
 ```
-HashMap<String,	Object>	customAttributes	=	new	HashMap<>()
-;
-	customAttributes.put(KEY,		VALUE);
+HashMap<String, Object>	customAttributes = new HashMap<>();
+	customAttributes.put(KEY, VALUE);
 ```
 ```
-HippoConfigAttributes	configAttributes	=	new	HippoConfigAt
-tributes.Builder()
+HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
 ...
 .setCustomAttributes(customAttributes)
 ...
@@ -166,80 +150,64 @@ tributes.Builder()
 #### To	configure	test	environment	use:
 
 ```
-HippoConfigAttributes	configAttributes	=	new	HippoConfigAt
-tributes.Builder()
+HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
 ...
 .setShowLog(true)
 ...
 .build();
 ```
-#### To	enable	payment	use:
-
-
+#### To enable payment use:
 ```
-HippoConfigAttributes	configAttributes	=	new	HippoConfigAt
-tributes.Builder()
+HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
 ...
 .setPaymentEnabled(true)
 ...
 .build();
 ```
-#### To	get	unread	count:
+#### To get	unread count:
 
 ```
-HippoConfigAttributes	configAttributes	=	new	HippoConfigAt
-tributes.Builder()
+HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
 ...
 .setUnreadCount(true)
 ...
 .build();
 ```
 ```
-//This	send	callback	in	following	interface:
-FuguConfig.getInstance().setCallbackListener(new	UnreadCou
-nt()	{
-				@Override
-				public	void	count(int	count)	{
-				Log.v("Unread",	"Unread	Count	=	"	+	count);
-				}
+//This send callback in following interface:
+
+FuguConfig.getInstance().setCallbackListener(new UnreadCount()	{
+		@Override
+		public void count(int count) {
+		Log.v("Unread",	"Unread	Count =	"+count);
+	}
 });
 ```
-### Changing	the	colors	of	Hippo	Chat
+### Changing	the	colors of Hippo Chat screens to give a look	and	feel	of your application
 
+Use	.setColorConfig(hippoColorConfig) function	in	builder to easily replicate	your application’s look and feel in Hippo Activities/Screens, reference code snippet is as follows:
 
-### screens	to	give	a	look	and	feel	of	your
-
-### application
-
-Use	.setColorConfig(hippoColorConfig) function	in	builder	to	easily
-replicate	your	application’s	look	and	feel	in	Hippo	Activities/Screens,
-reference	code	snippet	is	as	follows	:
-
-###### 	/**		
-
+###### 			
 ```
-				*	Set	color	configurations,	by	default	Hippo
-				*	default	colors	would	be	used
-				*/
-				HippoColorConfig	hippoColorConfig	=	new	HippoColorConf
-ig.Builder()
-				...
-				.hippoActionBarBg(YOUR_ACTION_BAR_BG_COLOR_STRING)
-				...
+/**
+* Set color configurations, by default Hippo
+* default colors would be used
+*/
+HippoColorConfig hippoColorConfig = new HippoColorConfig.Builder()
+	...
+	.hippoActionBarBg(YOUR_ACTION_BAR_BG_COLOR_STRING)
+	...
 .build();
 ```
 ```
-				HippoConfigAttributes	configAttributes	=	new	HippoConf
-igAttributes.Builder()
-								...
-								setColorConfig(hippoColorConfig)
-								...
-				.build();
+HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
+	...
+	setColorConfig(hippoColorConfig)
+	...
+.build();
 ```
 
-# Showing	conversations	inside
-
-# your	application
+# Showing conversations inside your application
 
 In	response	to	a	specific	UI	events	like	a	menu	selection	or	button
 onClick	event,	invoke	the	showConversations()	function	to	launch	the
@@ -407,3 +375,50 @@ keys	in	ChatByUniqueIdAttributes	builder
 
 This is a offline tool, your data stays locally and is not send to any server!
 Feedback & Bug Reports
+
+# Installing Hippochat SDK for manager on Android
+
+Please follow the below steps to init manager SDK in your app:
+```
+ HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
+                .setAuthToken(<Auth-token>)
+                .setAppType(<App-type>)
+                .setCustomAttributes(<custom attribute>)// optional
+                .setEnvironment(<test/live>)
+                .setProvider(<provider>)
+                .setColorConfig(<Color-config-file>)
+                .setManager(true) // for manager SDK
+                .setShowLog(<true/false>)
+                .setUnreadCount(<true/false>)
+                .setDeviceToken(<Device-token-for-push>)
+                .build();
+                
+        
+         HippoConfig.initHippoConfig(this, configAttributes);  
+```
+#### For getting unread count:
+
+```
+HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
+    ...
+    .setUnreadCount(true)
+    ...
+    .build();
+                
+HippoConfig.initHippoConfig(this, configAttributes);
+
+// set callback
+HippoConfig.getInstance().setCallbackListener(this);
+HippoConfig.getInstance().getTotalUnreadCount();
+```
+
+#### Open conversation screen:
+
+```
+HippoConfig.getInstance().openConversation(this, <Title>
+```
+
+#### Open conversation with other user using otheruseruniquekey: 
+```
+HippoConfig.getInstance().openConversationFor(<Context>, <otheruseruniquekey>, <Title>);
+```
