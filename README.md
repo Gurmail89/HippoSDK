@@ -350,7 +350,6 @@ myChannelButton.setOnClickListener(new OnClickListener() {
 });
 ```
 Note: For Peer to Peer chat you have to send other user unique keys in ChatByUniqueIdAttributes builder
-```
 This is a offline tool, your data stays locally and is not send to any server!
 Feedback & Bug Reports
 
