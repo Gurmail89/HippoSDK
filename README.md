@@ -399,3 +399,51 @@ HippoConfig.getInstance().openConversation(this, <Title>
 ```
 HippoConfig.getInstance().openConversationFor(<Context>, <otheruseruniquekey>, <Title>);
 ```
+
+
+# SDK for Calling
+Add Call SDK version in gradle file
+##### implementation 'com.hippochat:hippocall:1.0.8.2'
+
+```
+buildscript {
+ ext.kotlin_version = '1.2.71'
+ ...
+ dependencies {
+	 ...
+	 classpath "org.jetbrains.kotlin:kotlin-gradle plugin:$kotlin_version"
+ }
+}
+```
+
+For handling hippo call push, add the following code.
+```
+@Override  
+public void onMessageReceived(RemoteMessage remoteMessage) {  
+    HippoNotificationConfig hippoNotificationConfig = new HippoNotificationConfig();  
+    if (hippoNotificationConfig.isHippoNotification(remoteMessage.getData())) {  
+        if (hippoNotificationConfig.isHippoCallNotification(getApplicationContet(), remoteMessage.getData())) {  
+            JSONObject messageJson = new JSONObject(remoteMessage.getData().get("message"));  
+            HippoCallConfig.getInstance().onNotificationReceived(getApplicationContext(), messageJson);  
+        } else {  
+            hippoNotificationConfig.setSmallIcon(R.mipmap.ic_launcher);  
+            hippoNotificationConfig.setNotificationSoundEnabled(true);  
+            hippoNotificationConfig.setNotificationSoundEnabled(true / false);  
+            hippoNotificationConfig.setPriority(NotificationCompat.PRIORITY_HIGH);  
+            hippoNotificationConfig.showNotification(getApplicationContext(), remoteMessage.getData());  
+        }  
+    } else {  
+        // Your logic goes here  
+  }  
+}
+```
+
+Add the following line just below the : HippoConfig.initHippoConfig
+```
+HippoCallConfig.getInstance().setCallBackListener()
+```
+
+#### For call
+```
+HippoConfig.getInstance().startCall(<Context><callType><transactionId>,<userUniqueKey><otherUserName><ArrayList<String>  otherUserUniqueKeys><otheruserImageUrl>)
+```
