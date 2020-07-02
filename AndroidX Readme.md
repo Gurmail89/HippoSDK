@@ -116,12 +116,10 @@ CaptureUserData userData = new CaptureUserData.Builder()
 For additional UI implementation set the additionalBuilder values:
 ```
 val additionalInfo = AdditionalInfo.Builder()  
-    .hasChannelPager(true/false) // for    
+    .hasChannelPager(true/false) 
     .hasCreateNewChat(true)  
     .setEmptyChannelList("No Conversation Found")  
     .setCreateChatBtnText(getString(R.string.talk_to))  
-    .hasLogout(true)  
-    .showAgentImage(true)  
     .replyOnFeedback(true)  
     .build()
 ```
