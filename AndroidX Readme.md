@@ -115,8 +115,6 @@ CaptureUserData userData = new CaptureUserData.Builder()
 ```
 For additional UI implementation set the additionalBuilder values:
 ```
-
-```
 val additionalInfo = AdditionalInfo.Builder()  
     .hasChannelPager(true/false) // for    
     .hasCreateNewChat(true)  
@@ -127,6 +125,8 @@ val additionalInfo = AdditionalInfo.Builder()
     .replyOnFeedback(true)  
     .build()
 ```
+
+```
 HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
  .setAppKey(YOUR-APP-SECRET-KEY)
  .setAppType(APP_TYPE)
@@ -135,6 +135,7 @@ HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
  .setDeviceToken(<device_token>)
  .build();
 ```
+
 ```
 HippoConfig.initHippoConfig(this, configAttributes);
 ```
