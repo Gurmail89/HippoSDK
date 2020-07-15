@@ -131,6 +131,7 @@ HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
  .setCaptureUserData(userData)
  .setProvider(<file_provider>) //BuildConfig.APPLICATION_ID + ".provider"
  .setDeviceToken(<device_token>)
+ .setAdditionalInfo(additionalInfo)
  .build();
 ```
 
