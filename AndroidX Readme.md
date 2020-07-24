@@ -62,14 +62,14 @@ Do not forget to add internet permission in manifest if already not present
 
 ```
 <provider
-	 android:name="android.support.v4.content.FileProvider"
-	 android:authorities="{applicationId}.provider" //exp: com.example.project.provider
-	 android:exported="false"
-	 android:grantUriPermissions="true">
-	 <meta-data
-		 android:name="android.support.FILE_PROVIDER_PATHS"
-		 android:resource="@xml/provider_paths"/>
-</provider>
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+</provider>	
 ```
 
 Create a folder named xml in app/src/main/res
@@ -105,7 +105,7 @@ Don’t forget to replace the YOUR-APP-SECRET-KEY in the following code snippet 
 Before invoking/attempting to use any other features you need to initialised Hippo SDK.
 
 ```
-CaptureUserData userData = new CaptureUserData.Builder()
+val userData: CaptureUserData = CaptureUserData.Builder()
  .userUniqueKey("your unique identifier for user")
  .fullName("Full name string")
  .email("Email string")
@@ -125,7 +125,7 @@ val additionalInfo = AdditionalInfo.Builder()
 ```
 
 ```
-HippoConfigAttributes configAttributes = new HippoConfigAttributes.Builder()
+val configAttributes = HippoConfigAttributes.Builder()
  .setAppKey(YOUR-APP-SECRET-KEY)
  .setAppType(APP_TYPE)
  .setCaptureUserData(userData)
