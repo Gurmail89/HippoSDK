@@ -267,7 +267,7 @@ our app screen
 myConversationsButton.setOnClickListener(new OnClickListener() {
  @Override
  public void onClick(View view) {
-	 FuguConfig.getInstance().showConversations(<Pass calling activity here>, TITLE_TEXT);
+	 HippoConfig.getInstance().showConversations(<Pass calling activity here>, TITLE_TEXT);
  }
 });
 ```
